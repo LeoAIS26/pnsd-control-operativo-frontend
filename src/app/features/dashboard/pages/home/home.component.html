@@ -1,0 +1,89 @@
+<div class="dashboard-layout">
+  <!-- Barra Superior de Navegación -->
+  <mat-toolbar class="top-navbar">
+    <div class="brand-section">
+      <img src="images/logo-sernanp-pnsd.png" alt="SERNANP PNSD" class="brand-logo" />
+      <div class="brand-text">
+        <span class="brand-title">SISCOP</span>
+        <span class="brand-subtitle">Parque Nacional Sierra del Divisor</span>
+      </div>
+    </div>
+
+    <div class="user-section">
+      <div class="user-badge">
+        <mat-icon class="user-icon">account_circle</mat-icon>
+        <div class="user-info">
+          <span class="user-name">{{ authService.userName() }}</span>
+          <span class="user-role">{{ authService.userRole() }}</span>
+        </div>
+      </div>
+
+      <button mat-stroked-button class="btn-logout" (click)="cerrarSesion()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <!-- Contenido Central de Bienvenida y Prueba -->
+  <main class="main-content">
+    <div class="welcome-card">
+      
+      <div class="card-header-status">
+        <div class="status-chip">
+          <mat-icon>verified</mat-icon>
+          <span>Sesión Activa y Segura</span>
+        </div>
+      </div>
+
+      <h1 class="welcome-title">¡Bienvenido a SISCOP!</h1>
+      <p class="welcome-desc">
+        Has iniciado sesión correctamente en el <strong>Sistema de Control Operativo</strong> del Parque Nacional Sierra del Divisor - SERNANP.
+      </p>
+
+      <!-- Resumen de Datos de la Sesión -->
+      <div class="session-info-grid">
+        
+        <div class="info-box">
+          <span class="info-label">Usuario Conectado</span>
+          <span class="info-value">{{ authService.userName() }}</span>
+        </div>
+
+        <div class="info-box">
+          <span class="info-label">Rol en el Sistema</span>
+          <span class="info-value role-tag">{{ authService.userRole() }}</span>
+        </div>
+
+        <div class="info-box">
+          <span class="info-label">Estado de la Cuenta</span>
+          <span class="info-value status-active">HABILITADO</span>
+        </div>
+
+        <div class="info-box">
+          <span class="info-label">Token de Seguridad (JWT)</span>
+          <span class="info-value token-text">Activo (Bearer)</span>
+        </div>
+
+      </div>
+
+      <!-- Módulos Próximos -->
+      <div class="next-modules-box">
+        <h3>Módulos Operativos Listos para Integrar:</h3>
+        <ul>
+          <li>🚗 <strong>Tipos de Unidades y Equipos</strong> (Vehículos, Botes, Horas y Km)</li>
+          <li>⛽ <strong>Control de Combustible</strong> (Grifos y Vales de Combustible)</li>
+          <li>📋 <strong>Gestión de Bitácoras</strong> de Control Operativo</li>
+        </ul>
+      </div>
+
+      <!-- Botón de prueba de cierre de sesión -->
+      <div class="action-footer">
+        <button mat-flat-button class="btn-sernanp-primary" (click)="cerrarSesion()">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar Sesión y Volver al Login</span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+</div>

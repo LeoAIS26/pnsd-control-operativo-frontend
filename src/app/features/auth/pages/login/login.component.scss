@@ -1,0 +1,191 @@
+.login-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background-image: url('/images/fondo-sierra-divisor.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(1.5px);
+    z-index: 1;
+  }
+}
+
+.login-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: var(--sernanp-radius-card, 22px);
+  padding: 38px 36px 30px;
+  box-shadow: var(--sernanp-shadow-card, 0 20px 45px rgba(0, 0, 0, 0.35));
+  animation: cardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logos-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 22px;
+
+  .logo-escudo {
+    height: 58px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .logo-sernanp {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+.title-section {
+  text-align: center;
+  margin-bottom: 22px;
+
+  .main-title {
+    color: var(--sernanp-primary, #1B5E20);
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    color: var(--sernanp-text-body, #374151);
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.45;
+    margin: 0;
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+
+    .field-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1F2937;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+
+      .required {
+        color: #DC2626;
+        margin-left: 2px;
+      }
+    }
+
+    .custom-field {
+      width: 100%;
+
+      ::ng-deep .mat-mdc-text-field-wrapper {
+        background-color: #FFFFFF !important;
+        border-radius: 8px !important;
+      }
+
+      ::ng-deep .mdc-notched-outline__leading,
+      ::ng-deep .mdc-notched-outline__notch,
+      ::ng-deep .mdc-notched-outline__trailing {
+        border-color: #D1D5DB !important;
+      }
+
+      &.mat-focused {
+        ::ng-deep .mdc-notched-outline__leading,
+        ::ng-deep .mdc-notched-outline__notch,
+        ::ng-deep .mdc-notched-outline__trailing {
+          border-color: var(--sernanp-primary, #1B5E20) !important;
+          border-width: 2px !important;
+        }
+      }
+
+      input {
+        font-size: 0.95rem;
+        color: #1F2937;
+
+        &::placeholder {
+          color: #9CA3AF;
+        }
+      }
+    }
+  }
+
+  .submit-btn {
+    margin-top: 8px;
+    height: 48px;
+
+    .btn-spinner {
+      margin-right: 8px;
+      display: inline-block;
+
+      ::ng-deep circle {
+        stroke: #FFFFFF !important;
+      }
+    }
+  }
+}
+
+.toggle-icon {
+  color: #6B7280;
+  cursor: pointer;
+}
+
+.support-footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 28px 20px 24px;
+    border-radius: 18px;
+  }
+
+  .logos-header {
+    gap: 20px;
+
+    .logo-escudo {
+      height: 48px;
+    }
+    .logo-sernanp {
+      height: 44px;
+    }
+  }
+
+  .title-section .main-title {
+    font-size: 1.35rem;
+  }
+}
