@@ -1,8 +1,8 @@
-﻿export const environment = {
+export const environment = {
   production: true,
   apiUrl: 'http://localhost:8081/api',
-  tokenKey: 'sigcob_token',
-  userKey: 'sigcob_user',
-  appName: 'SIGCOB',
-  appFullName: 'Sistema de Gestión de Bitácoras del Parque Nacional Sierra del Divisor'
+  tokenKey: 'siscop_token',
+  userKey: 'siscop_user',
+  appName: 'SISCOP',
+  appFullName: 'Sistema de Control Operativo del Parque Nacional Sierra del Divisor'
 };

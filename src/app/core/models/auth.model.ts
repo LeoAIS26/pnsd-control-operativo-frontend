@@ -1,5 +1,5 @@
 ﻿/**
- * Credenciales para iniciar sesión en SIGCOB
+ * Credenciales para iniciar sesión en SISCOP
  */
 export interface LoginRequest {
   nombre: string;
