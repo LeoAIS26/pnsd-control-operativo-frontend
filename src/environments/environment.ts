@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8081/api',
+  apiUrl: 'https://pnsd-control-operativo-backend.onrender.com/api',
   tokenKey: 'siscop_token',
   userKey: 'siscop_user',
   appName: 'SISCOP',

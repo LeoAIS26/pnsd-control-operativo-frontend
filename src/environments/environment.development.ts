@@ -4,5 +4,5 @@ export const environment = {
   tokenKey: 'siscop_token',
   userKey: 'siscop_user',
   appName: 'SISCOP',
-  appFullName: 'Sistema de Control Operativo del Parque Nacional Sierra del Divisor'
+  appFullName: 'Sistema de Control Operativo del Parque Nacional Sierra del Divisor (Local Dev)'
 };
