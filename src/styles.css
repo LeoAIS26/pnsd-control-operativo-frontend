@@ -1,1 +1,175 @@
-/* You can add global styles to this file, and also import other style files */
+/* ==========================================================================
+   PALETA DE COLORES INSTITUCIONAL SERNANP & ESTILOS GLOBALES SIGCOB
+   ========================================================================== */
+
+:root {
+  /* Colores Principales SERNANP */
+  --sernanp-primary: #1B5E20;
+  --sernanp-primary-hover: #144718;
+  --sernanp-primary-light: #2E7D32;
+  --sernanp-primary-active: #0D3311;
+
+  /* Fondos y Superficies */
+  --sernanp-surface: #FFFFFF;
+  --sernanp-surface-subtle: #F9FAFB;
+  --sernanp-backdrop: rgba(0, 0, 0, 0.45);
+
+  /* Alertas y Estados */
+  --sernanp-alert-success-bg: #D4EDDA;
+  --sernanp-alert-success-text: #155724;
+  --sernanp-alert-success-border: #C3E6CB;
+
+  --sernanp-alert-error-bg: #F8D7DA;
+  --sernanp-alert-error-text: #721C24;
+  --sernanp-alert-error-border: #F5C6CB;
+
+  /* Tipografía y Textos */
+  --sernanp-text-title: #1B5E20;
+  --sernanp-text-body: #374151;
+  --sernanp-text-muted: #6B7280;
+  --sernanp-text-white: #FFFFFF;
+
+  /* Bordes e Inputs */
+  --sernanp-border: #E5E7EB;
+  --sernanp-border-focus: #2E7D32;
+  --sernanp-input-bg: #FFFFFF;
+
+  /* Soporte y Terceros */
+  --sernanp-whatsapp: #25D366;
+  --sernanp-whatsapp-link: #007BFF;
+
+  /* Sombras y Elevaciones */
+  --sernanp-shadow-card: 0 20px 45px -10px rgba(0, 0, 0, 0.35);
+  --sernanp-shadow-btn: 0 4px 12px rgba(27, 94, 32, 0.3);
+  --sernanp-shadow-btn-hover: 0 6px 16px rgba(27, 94, 32, 0.45);
+
+  /* Radios de borde */
+  --sernanp-radius-card: 22px;
+  --sernanp-radius-input: 8px;
+  --sernanp-radius-btn: 8px;
+
+  /* Transiciones */
+  --sernanp-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset Global */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--sernanp-text-body);
+  background-color: #F3F4F6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   UTILIDADES REUTILIZABLES PARA FORMULARIOS Y ALERTAS
+   ========================================================================== */
+
+/* Alerta de notificación (Éxito / Información) */
+.sernanp-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 18px;
+  border: 1px solid transparent;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.sernanp-alert-success {
+  background-color: var(--sernanp-alert-success-bg);
+  color: var(--sernanp-alert-success-text);
+  border-color: var(--sernanp-alert-success-border);
+}
+
+.sernanp-alert-error {
+  background-color: var(--sernanp-alert-error-bg);
+  color: var(--sernanp-alert-error-text);
+  border-color: var(--sernanp-alert-error-border);
+}
+
+.sernanp-alert mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Botón Principal SERNANP */
+.btn-sernanp-primary {
+  width: 100%;
+  background-color: var(--sernanp-primary) !important;
+  color: var(--sernanp-text-white) !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.5px !important;
+  padding: 14px !important;
+  border-radius: var(--sernanp-radius-btn) !important;
+  box-shadow: var(--sernanp-shadow-btn);
+  transition: var(--sernanp-transition);
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-sernanp-primary:hover:not(:disabled) {
+  background-color: var(--sernanp-primary-hover) !important;
+  box-shadow: var(--sernanp-shadow-btn-hover);
+  transform: translateY(-1px);
+}
+
+.btn-sernanp-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Enlace a soporte WhatsApp */
+.support-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--sernanp-whatsapp-link);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: var(--sernanp-transition);
+}
+
+.support-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.support-link .whatsapp-icon {
+  color: var(--sernanp-whatsapp);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
