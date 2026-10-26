@@ -46,7 +46,6 @@ export class AuthService {
    */
   guardarSesion(auth: AuthResponse): void {
     const usuario: UsuarioSesion = {
-      idUsuario: auth.idUsuario,
       uuid: auth.uuid,
       nombre: auth.nombre,
       rol: auth.rol,

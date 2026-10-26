@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Credenciales para iniciar sesión en SISCOP
  */
 export interface LoginRequest {
@@ -18,7 +18,6 @@ export interface AuthResponse {
   token: string;
   tipoToken: string;
   expiracionMilisegundos: number;
-  idUsuario: number;
   uuid: string;
   nombre: string;
   rol: RolUsuario;
@@ -29,7 +28,6 @@ export interface AuthResponse {
  * Datos del usuario autenticado almacenados en la sesión
  */
 export interface UsuarioSesion {
-  idUsuario: number;
   uuid: string;
   nombre: string;
   rol: RolUsuario;
