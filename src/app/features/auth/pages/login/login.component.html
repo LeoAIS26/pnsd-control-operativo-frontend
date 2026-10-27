@@ -1,19 +1,27 @@
 <div class="login-container">
-  <!-- Tarjeta Central Flotante -->
   <div class="login-card">
     
-    <!-- Encabezado con Logos Institucionales -->
+    <!-- Encabezado Institucional con Logos -->
     <div class="logos-header">
-      <img src="images/escudo-peru.png" alt="Escudo del Perú" class="logo-escudo" />
-      <img src="images/logo-sernanp-pnsd.png" alt="SERNANP Sierra del Divisor" class="logo-sernanp" />
+      <img
+        src="images/escudo-peru.png"
+        alt="Escudo Nacional del Perú"
+        class="logo-escudo"
+      />
+      <div class="logo-divider"></div>
+      <img
+        src="images/logo-sernanp-pnsd.png"
+        alt="Logo SERNANP PNSD"
+        class="logo-sernanp"
+      />
     </div>
 
     <!-- Título y Subtítulo -->
     <div class="title-section">
       <h1 class="main-title">BIENVENIDO A SISCOP</h1>
       <p class="subtitle">
-        Sistema de Control Operativo del Parque Nacional<br />
-        Sierra del Divisor - SERNANP
+        Sistema de Control Operativo<br />
+        <strong>Parque Nacional Sierra del Divisor - SERNANP</strong>
       </p>
     </div>
 
@@ -37,12 +45,13 @@
       
       <!-- Campo Usuario -->
       <div class="form-group">
-        <label class="field-label">USUARIO<span class="required">*</span></label>
+        <label class="field-label">USUARIO <span class="required">*</span></label>
         <mat-form-field appearance="outline" class="custom-field">
+          <mat-icon matPrefix class="input-icon">person</mat-icon>
           <input
             matInput
             formControlName="nombre"
-            placeholder="Ingrese su usuario"
+            placeholder="Ingrese su nombre de usuario"
             autocomplete="username"
           />
           @if (loginForm.get('nombre')?.touched && loginForm.get('nombre')?.hasError('required')) {
@@ -53,8 +62,18 @@
 
       <!-- Campo Contraseña -->
       <div class="form-group">
-        <label class="field-label">CONTRASEÑA<span class="required">*</span></label>
+        <div class="password-label-row">
+          <label class="field-label">CONTRASEÑA <span class="required">*</span></label>
+          <button
+            type="button"
+            class="link-forgot-password"
+            (click)="openForgotPassword()"
+          >
+            ¿Olvidaste tu contraseña?
+          </button>
+        </div>
         <mat-form-field appearance="outline" class="custom-field">
+          <mat-icon matPrefix class="input-icon">lock</mat-icon>
           <input
             matInput
             [type]="hidePassword() ? 'password' : 'text'"
@@ -68,6 +87,7 @@
             matSuffix
             (click)="togglePasswordVisibility()"
             [attr.aria-label]="hidePassword() ? 'Mostrar contraseña' : 'Ocultar contraseña'"
+            class="btn-toggle-eye"
           >
             <mat-icon class="toggle-icon">
               {{ hidePassword() ? 'visibility_off' : 'visibility' }}
@@ -94,30 +114,99 @@
         }
       </button>
 
+      <!-- Divisor Estándar -->
+      <div class="divider-section">
+        <span class="divider-line"></span>
+        <span class="divider-text">¿No tienes una cuenta?</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- Botón / Enlace de Registro -->
+      <button
+        type="button"
+        mat-stroked-button
+        class="btn-register-secondary"
+        (click)="openRegister()"
+      >
+        <mat-icon>person_add</mat-icon>
+        <span>Registrarse en SISCOP</span>
+      </button>
+
     </form>
 
-    <!-- Enlace de Soporte WhatsApp -->
-    <div class="support-footer">
-      <a
-        href="https://wa.me/51999999999?text=Hola,%20solicito%20ayuda%20para%20acceder%20al%20sistema%20SISCOP"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="support-link"
-      >
-        <svg
-          class="whatsapp-icon"
-          viewBox="0 0 24 24"
-          width="20"
-          height="20"
-          fill="currentColor"
-        >
-          <path
-            d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.11 7.44C8.94 7.44 8.68 7.5 8.46 7.74C8.24 7.98 7.62 8.56 7.62 9.72C7.62 10.88 8.47 12 8.58 12.16C8.71 12.32 10.23 14.67 12.57 15.68C14.51 16.51 14.91 16.35 15.33 16.31C15.75 16.27 16.7 15.75 16.9 15.19C17.1 14.63 17.1 14.15 17.04 14.05C16.98 13.95 16.82 13.89 16.58 13.77C16.34 13.65 15.17 13.07 14.95 13C14.74 12.91 14.58 12.87 14.42 13.11C14.26 13.35 13.8 13.89 13.66 14.05C13.52 14.21 13.38 14.23 13.14 14.11C12.9 13.99 11.89 13.66 10.69 12.59C9.76 11.75 9.13 10.72 8.95 10.42C8.77 10.12 8.93 9.95 9.05 9.83C9.16 9.72 9.3 9.53 9.42 9.39C9.54 9.25 9.58 9.15 9.66 8.99C9.74 8.83 9.7 8.69 9.64 8.57C9.58 8.45 9.11 7.33 8.92 6.86C8.73 6.4 8.54 6.46 8.39 6.45C8.26 6.45 8.1 6.44 7.94 6.44L9.11 7.44Z"
-          />
-        </svg>
-        <span>¿Necesita ayuda para acceder? Escríbanos por WhatsApp</span>
-      </a>
+    <!-- Footer Institucional -->
+    <div class="institutional-footer">
+      <span class="footer-badge">SERNANP • MINAM</span>
+      <p class="footer-copy">Sistema de Control Operativo © 2026</p>
     </div>
 
   </div>
 </div>
+
+<!-- Modal Informativo: Recuperar Contraseña -->
+@if (showForgotPasswordModal()) {
+  <div class="modal-backdrop" (click)="closeForgotPassword()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-icon-circle forgot-icon">
+          <mat-icon>lock_reset</mat-icon>
+        </div>
+        <h2 class="modal-title">Recuperación de Contraseña</h2>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Por políticas de seguridad y control interno del <strong>SERNANP</strong>, el restablecimiento de credenciales es gestionado por el Administrador del Sistema o la Jefatura del Parque Nacional.
+        </p>
+        <div class="info-highlight">
+          <mat-icon>contact_support</mat-icon>
+          <div>
+            <strong>Canal de Soporte Institucional:</strong>
+            <p>Jefatura del PNSD • Pucallpa / Contamana</p>
+            <p>Email: <code>soporte.pnsd@sernanp.gob.pe</code></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button mat-flat-button class="btn-modal-close" (click)="closeForgotPassword()">
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Modal Informativo: Registrarse -->
+@if (showRegisterModal()) {
+  <div class="modal-backdrop" (click)="closeRegister()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-icon-circle register-icon">
+          <mat-icon>assignment_ind</mat-icon>
+        </div>
+        <h2 class="modal-title">Registro de Nueva Cuenta</h2>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          El acceso a <strong>SISCOP</strong> está restringido exclusivamente al personal acreditado, guardaparques y funcionarios del <strong>Parque Nacional Sierra del Divisor</strong>.
+        </p>
+        <div class="info-highlight green">
+          <mat-icon>verified_user</mat-icon>
+          <div>
+            <strong>Procedimiento de Alta:</strong>
+            <p>1. Solicite su registro con su Jefe de Puesto de Control.</p>
+            <p>2. El Administrador habilitará su usuario con el rol correspondiente (Guardaparque / Administrador).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button mat-flat-button class="btn-modal-close" (click)="closeRegister()">
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+}

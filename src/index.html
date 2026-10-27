@@ -4,12 +4,22 @@
     <meta charset="utf-8" />
     <title>SISCOP - Sistema de Control Operativo PNSD</title>
     <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- Meta Tags para PWA (Instalable en Móviles Android & iOS) -->
+    <meta name="theme-color" content="#1B5E20" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="SISCOP PNSD" />
+    <link rel="apple-touch-icon" href="images/logo-sernanp-pnsd.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;800&display=swap"
       rel="stylesheet"
     />
     <link
@@ -19,5 +29,16 @@
   </head>
   <body>
     <app-root></app-root>
+
+    <!-- Registro del Service Worker para PWA Offline -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((reg) => console.log('[PWA] Service Worker registrado exitosamente:', reg.scope))
+            .catch((err) => console.warn('[PWA] Error al registrar Service Worker:', err));
+        });
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,31 @@
+{
+  "name": "SISCOP - Control Operativo SERNANP",
+  "short_name": "SISCOP",
+  "description": "Sistema de Control Operativo del Parque Nacional Sierra del Divisor - SERNANP",
+  "start_url": "/",
+  "id": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1B5E20",
+  "theme_color": "#1B5E20",
+  "orientation": "any",
+  "categories": [
+    "government",
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "images/logo-sernanp-pnsd.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/logo-sernanp-pnsd.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

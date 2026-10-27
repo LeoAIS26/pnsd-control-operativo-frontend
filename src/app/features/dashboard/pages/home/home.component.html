@@ -1,5 +1,24 @@
 <div class="dashboard-layout">
-  <!-- Barra Superior de Navegación -->
+  
+  <!-- Banner reactivo de Modo Offline / Simulación -->
+  @if (!isOnline() || isSimulatingOffline()) {
+    <div class="offline-banner">
+      <div class="banner-content">
+        <mat-icon class="pulse-icon">cloud_off</mat-icon>
+        <div class="banner-text">
+          <strong>MODO SIN CONEXIÓN (OFFLINE) ACTIVO</strong>
+          <span>Estás navegando en modo PWA con datos cacheados en tu dispositivo. Ideal para campo en Sierra del Divisor.</span>
+        </div>
+      </div>
+      @if (isSimulatingOffline()) {
+        <button mat-button class="btn-banner-action" (click)="toggleSimulacionOffline()">
+          Desactivar Simulación
+        </button>
+      }
+    </div>
+  }
+
+  <!-- Barra Superior de Navegación Institucional -->
   <mat-toolbar class="top-navbar">
     <div class="brand-section">
       <img src="images/logo-sernanp-pnsd.png" alt="SERNANP PNSD" class="brand-logo" />
@@ -9,79 +28,171 @@
       </div>
     </div>
 
-    <div class="user-section">
+    <div class="header-actions">
+      <!-- Indicador de Conexión PWA -->
+      <div class="connection-status-badge" [class.is-offline]="!isOnline() || isSimulatingOffline()">
+        <span class="status-dot"></span>
+        <span class="status-text">
+          {{ (!isOnline() || isSimulatingOffline()) ? 'Sin Conexión (Offline)' : 'En Línea' }}
+        </span>
+      </div>
+
+      <!-- Perfil de Usuario y Logout -->
       <div class="user-badge">
-        <mat-icon class="user-icon">account_circle</mat-icon>
-        <div class="user-info">
+        <mat-icon class="user-avatar-icon">account_circle</mat-icon>
+        <div class="user-details">
           <span class="user-name">{{ authService.userName() }}</span>
           <span class="user-role">{{ authService.userRole() }}</span>
         </div>
       </div>
 
-      <button mat-stroked-button class="btn-logout" (click)="cerrarSesion()">
+      <button mat-stroked-button class="btn-logout" (click)="cerrarSesion()" title="Cerrar Sesión">
         <mat-icon>logout</mat-icon>
-        <span>Cerrar Sesión</span>
+        <span class="logout-text">Cerrar Sesión</span>
       </button>
     </div>
   </mat-toolbar>
 
-  <!-- Contenido Central de Bienvenida y Prueba -->
+  <!-- Contenido Principal -->
   <main class="main-content">
-    <div class="welcome-card">
-      
-      <div class="card-header-status">
-        <div class="status-chip">
-          <mat-icon>verified</mat-icon>
-          <span>Sesión Activa y Segura</span>
-        </div>
-      </div>
+    <div class="dashboard-container">
 
-      <h1 class="welcome-title">¡Bienvenido a SISCOP!</h1>
-      <p class="welcome-desc">
-        Has iniciado sesión correctamente en el <strong>Sistema de Control Operativo</strong> del Parque Nacional Sierra del Divisor - SERNANP.
-      </p>
-
-      <!-- Resumen de Datos de la Sesión -->
-      <div class="session-info-grid">
+      <!-- Tarjeta de Bienvenida y Estado PWA -->
+      <div class="welcome-card">
         
-        <div class="info-box">
-          <span class="info-label">Usuario Conectado</span>
-          <span class="info-value">{{ authService.userName() }}</span>
+        <div class="welcome-header">
+          <div class="badge-status-pwa">
+            <mat-icon>verified</mat-icon>
+            <span>Sesión Activa • JWT Seguro</span>
+          </div>
+
+          @if (isInstalled()) {
+            <span class="installed-tag">
+              <mat-icon>phone_android</mat-icon> App Instalada
+            </span>
+          }
         </div>
 
-        <div class="info-box">
-          <span class="info-label">Rol en el Sistema</span>
-          <span class="info-value role-tag">{{ authService.userRole() }}</span>
+        <h1 class="welcome-title">¡Bienvenido a SISCOP!</h1>
+        <p class="welcome-desc">
+          Panel de Control Operativo del <strong>Parque Nacional Sierra del Divisor - SERNANP</strong>.
+          La aplicación cuenta con soporte <strong>PWA (Progressive Web App)</strong> para ser instalada en teléfonos móviles y operar sin señal de internet en campo.
+        </p>
+
+        <!-- Bloque Destacado de PWA / Instalación en Celular -->
+        <div class="pwa-action-box">
+          <div class="pwa-info">
+            <div class="pwa-icon-wrapper">
+              <mat-icon>install_mobile</mat-icon>
+            </div>
+            <div class="pwa-texts">
+              <h3>Instalar en tu Celular (Modo PWA)</h3>
+              <p>
+                Puedes instalar esta aplicación como si fuera nativa en Android o iOS, accediendo con ícono directo en tu pantalla y con soporte offline.
+              </p>
+            </div>
+          </div>
+
+          <div class="pwa-buttons">
+            <button
+              mat-flat-button
+              class="btn-install-pwa"
+              (click)="instalarPwa()"
+            >
+              <mat-icon>download_for_offline</mat-icon>
+              <span>{{ isInstalled() ? 'Instrucciones Celular' : 'Instalar en mi Celular' }}</span>
+            </button>
+
+            <button
+              mat-stroked-button
+              class="btn-test-offline"
+              [class.active]="isSimulatingOffline()"
+              (click)="toggleSimulacionOffline()"
+            >
+              <mat-icon>{{ isSimulatingOffline() ? 'wifi' : 'wifi_off' }}</mat-icon>
+              <span>{{ isSimulatingOffline() ? 'Quitar Simulación' : 'Simular Modo Offline' }}</span>
+            </button>
+          </div>
         </div>
 
-        <div class="info-box">
-          <span class="info-label">Estado de la Cuenta</span>
-          <span class="info-value status-active">HABILITADO</span>
+        <!-- Resumen de Datos de la Sesión -->
+        <h2 class="section-title">Datos de la Sesión Actual</h2>
+        <div class="session-info-grid">
+          
+          <div class="info-box">
+            <div class="info-icon-box">
+              <mat-icon>person</mat-icon>
+            </div>
+            <div class="info-texts">
+              <span class="info-label">Usuario Conectado</span>
+              <span class="info-value">{{ authService.userName() }}</span>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-icon-box role-icon">
+              <mat-icon>shield_person</mat-icon>
+            </div>
+            <div class="info-texts">
+              <span class="info-label">Rol Asignado</span>
+              <span class="info-value role-tag">{{ authService.userRole() }}</span>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-icon-box status-icon">
+              <mat-icon>check_circle</mat-icon>
+            </div>
+            <div class="info-texts">
+              <span class="info-label">Estado de Cuenta</span>
+              <span class="info-value status-active">HABILITADO</span>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-icon-box network-icon" [class.offline]="!isOnline() || isSimulatingOffline()">
+              <mat-icon>{{ (!isOnline() || isSimulatingOffline()) ? 'signal_wifi_off' : 'wifi' }}</mat-icon>
+            </div>
+            <div class="info-texts">
+              <span class="info-label">Modo de Red</span>
+              <span class="info-value" [class.offline-text]="!isOnline() || isSimulatingOffline()">
+                {{ (!isOnline() || isSimulatingOffline()) ? 'Offline (Caché)' : 'Online (Nube)' }}
+              </span>
+            </div>
+          </div>
+
         </div>
 
-        <div class="info-box">
-          <span class="info-label">Token de Seguridad (JWT)</span>
-          <span class="info-value token-text">Activo (Bearer)</span>
+        <!-- Módulos Operativos Próximos -->
+        <h2 class="section-title">Módulos del Sistema Operativo</h2>
+        <div class="modules-grid">
+          
+          <div class="module-card">
+            <div class="module-icon">
+              <mat-icon>directions_boat</mat-icon>
+            </div>
+            <h4>Flota y Unidades</h4>
+            <p>Registro de vehículos terrestres, botes fluviales y generadores del PNSD.</p>
+          </div>
+
+          <div class="module-card">
+            <div class="module-icon">
+              <mat-icon>local_gas_station</mat-icon>
+            </div>
+            <h4>Vales de Combustible</h4>
+            <p>Control de asignaciones, grifos autorizados y consumo operativo.</p>
+          </div>
+
+          <div class="module-card">
+            <div class="module-icon">
+              <mat-icon>menu_book</mat-icon>
+            </div>
+            <h4>Bitácoras Diarias</h4>
+            <p>Registro de patrullajes fluviales, kilometraje y horas motor en selva.</p>
+          </div>
+
         </div>
 
-      </div>
-
-      <!-- Módulos Próximos -->
-      <div class="next-modules-box">
-        <h3>Módulos Operativos Listos para Integrar:</h3>
-        <ul>
-          <li>🚗 <strong>Tipos de Unidades y Equipos</strong> (Vehículos, Botes, Horas y Km)</li>
-          <li>⛽ <strong>Control de Combustible</strong> (Grifos y Vales de Combustible)</li>
-          <li>📋 <strong>Gestión de Bitácoras</strong> de Control Operativo</li>
-        </ul>
-      </div>
-
-      <!-- Botón de prueba de cierre de sesión -->
-      <div class="action-footer">
-        <button mat-flat-button class="btn-sernanp-primary" (click)="cerrarSesion()">
-          <mat-icon>logout</mat-icon>
-          <span>Cerrar Sesión y Volver al Login</span>
-        </button>
       </div>
 
     </div>

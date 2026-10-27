@@ -38,7 +38,11 @@ export class LoginComponent implements OnInit {
   readonly errorMessage = signal<string | null>(null);
   readonly successMessage = signal<string | null>(null);
 
-  private returnUrl: string = '/';
+  // Modales informativos para Olvidaste Contraseña y Registrarse
+  readonly showForgotPasswordModal = signal(false);
+  readonly showRegisterModal = signal(false);
+
+  private returnUrl: string = '/dashboard';
 
   ngOnInit(): void {
     this.initForm();
@@ -65,6 +69,22 @@ export class LoginComponent implements OnInit {
 
   togglePasswordVisibility(): void {
     this.hidePassword.update((val) => !val);
+  }
+
+  openForgotPassword(): void {
+    this.showForgotPasswordModal.set(true);
+  }
+
+  closeForgotPassword(): void {
+    this.showForgotPasswordModal.set(false);
+  }
+
+  openRegister(): void {
+    this.showRegisterModal.set(true);
+  }
+
+  closeRegister(): void {
+    this.showRegisterModal.set(false);
   }
 
   onSubmit(): void {
